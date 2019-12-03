@@ -268,6 +268,9 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\PlaceConnection.cs" />
+    <Compile Include="Commands\PlaceCustomConnection.cs" />
+    <Compile Include="ConnectionsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -289,86 +292,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-      echo Configuration: $(Configuration)
-
-      if $(Configuration) == Debug2017 goto D2017
-      if $(Configuration) == Debug2018 goto D2018
-      if $(Configuration) == Debug2019 goto D2019
-      if $(Configuration) == Debug2020 goto D2020
-
-      if $(Configuration) == Release2017 goto R2017
-      if $(Configuration) == Release2018 goto R2018
-      if $(Configuration) == Release2019 goto R2019
-      if $(Configuration) == Release2020 goto R2020
-
-      echo ######## INVALID CONFIGURATION SPECIFIED ########
-
-      goto exit
-
-      :D2016
-      echo Copying results to 2016
-      if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2016\$(ProjectName)\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2016\$(ProjectName)\"
-      XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2016\$(ProjectName)\" /Y /R /F /I /S
-      copy "$(ProjectDir)\$(ProjectName).addin" "%25ProgramData%25\Autodesk\Revit\Addins\2016\"
-      goto exit
-
-      :D2017
-      echo Copying results to 2017
-      if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2017\$(ProjectName)\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2017\$(ProjectName)\"
-      XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2017\$(ProjectName)\" /Y /R /F /I /S
-      copy "$(ProjectDir)\$(ProjectName).addin" "%25ProgramData%25\Autodesk\Revit\Addins\2017\"
-      goto exit
-
-      :D2018
-      echo Copying results to 2018
-      if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2018\$(ProjectName)\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2018\$(ProjectName)\"
-      XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2018\$(ProjectName)\" /Y /R /F /I /S
-      copy "$(ProjectDir)\$(ProjectName).addin" "%25ProgramData%25\Autodesk\Revit\Addins\2018\"
-      goto exit
-
-      :D2019
-      echo Copying results to 2019
-      if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2019\$(ProjectName)\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2019\$(ProjectName)\"
-      XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2019\$(ProjectName)\" /Y /R /F /I /S
-      copy "$(ProjectDir)\$(ProjectName).addin" "%25ProgramData%25\Autodesk\Revit\Addins\2019\"
-      goto exit
-
-      :D2020
-      echo Copying results to 2020
-      if not exist "%25ProgramData%25\Autodesk\Revit\Addins\2020\$(ProjectName)\" mkdir "%25ProgramData%25\Autodesk\Revit\Addins\2020\$(ProjectName)\"
-      XCOPY "$(TargetDir)\*" "%25ProgramData%25\Autodesk\Revit\Addins\2020\$(ProjectName)\" /Y /R /F /I /S
-      copy "$(ProjectDir)\$(ProjectName).addin" "%25ProgramData%25\Autodesk\Revit\Addins\2020\"
-      goto exit
-
-      :R2017
-      echo Copying results to bundle 2017
-      if not exist "$(SolutionDir)$(ProjectName).bundle\Contents\2017\$(ProjectName)" mkdir "$(SolutionDir)$(ProjectName).bundle\Contents\2017\$(ProjectName)"
-      XCOPY "$(TargetDir)\*" "$(SolutionDir)$(ProjectName).bundle\Contents\2017\$(ProjectName)\" /Y /R /F /I /S
-      copy "$(ProjectDir)\$(ProjectName).addin" "$(SolutionDir)$(ProjectName).bundle\Contents\2017\"
-      goto exit
-
-      :R2018
-      echo Copying results to bundle 2018
-      if not exist "$(SolutionDir)$(ProjectName).bundle\Contents\2018\$(ProjectName)" mkdir "$(SolutionDir)$(ProjectName).bundle\Contents\2018\$(ProjectName)"
-      XCOPY "$(TargetDir)\*" "$(SolutionDir)$(ProjectName).bundle\Contents\2018\$(ProjectName)\" /Y /R /F /I /S
-      copy "$(ProjectDir)\$(ProjectName).addin" "$(SolutionDir)$(ProjectName).bundle\Contents\2018\"
-      goto exit
-
-      :R2019
-      echo Copying results to bundle 2019
-      if not exist "$(SolutionDir)$(ProjectName).bundle\Contents\2019\$(ProjectName)" mkdir "$(SolutionDir)$(ProjectName).bundle\Contents\2019\$(ProjectName)"
-      XCOPY "$(TargetDir)\*" "$(SolutionDir)$(ProjectName).bundle\Contents\2019\$(ProjectName)\" /Y /R /F /I /S
-      copy "$(ProjectDir)\$(ProjectName).addin" "$(SolutionDir)$(ProjectName).bundle\Contents\2019\"
-      goto exit
-
-      :R2020
-      echo Copying results to bundle 2020
-      if not exist "$(SolutionDir)$(ProjectName).bundle\Contents\2020\$(ProjectName)" mkdir "$(SolutionDir)$(ProjectName).bundle\Contents\2020\$(ProjectName)"
-      XCOPY "$(TargetDir)\*" "$(SolutionDir)$(ProjectName).bundle\Contents\2020\$(ProjectName)\" /Y /R /F /I /S
-      copy "$(ProjectDir)\$(ProjectName).addin" "$(SolutionDir)$(ProjectName).bundle\Contents\2020\"
-      goto exit
-
-      :exit</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
